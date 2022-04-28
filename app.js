@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
@@ -11,7 +12,9 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://admin-vicky:Test-123@cluster0.xscbi.mongodb.net/todolistDB", {useNewUrlParser: true});
+const mongoPassword = process.env.MONGO_PASSWORD;
+
+mongoose.connect(`mongodb+srv://admin-vicky:${mongoPassword}@cluster0.xscbi.mongodb.net/todolistDB`, {useNewUrlParser: true});
 
 const itemsSchema = {
     name: {
